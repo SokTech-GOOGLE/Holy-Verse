@@ -2,7 +2,17 @@
 import { GoogleGenAI, Type, Modality } from "@google/genai";
 import { Devotional, QuizQuestion } from '../types';
 
-const getAI = () => new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+// Declare process for the TypeScript compiler in the browser context
+declare var process: {
+  env: {
+    API_KEY?: string;
+  };
+};
+
+const getAI = () => {
+  const apiKey = process.env.API_KEY || '';
+  return new GoogleGenAI({ apiKey });
+};
 
 export const getVerseExplanation = async (reference: string, text: string) => {
   const ai = getAI();

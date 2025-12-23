@@ -109,7 +109,7 @@ const ReaderView: React.FC<ReaderViewProps> = ({ bookmarks, onToggleBookmark, on
             <h1 className="text-4xl font-bold mb-10 text-slate-900 border-b pb-6 border-slate-50">{data.reference}</h1>
             <div className="space-y-6">
               {data.verses.map((v: BibleVerse) => {
-                // Use the parent data.reference to build the verse reference to avoid property issues
+                // Ensure ref is built using standard fields to avoid property existence errors
                 const ref = `${data.reference}:${v.verse}`;
                 const isBookmarked = bookmarks.some(b => b.reference === ref);
                 
