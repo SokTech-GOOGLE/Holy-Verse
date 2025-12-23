@@ -1,0 +1,7 @@
+{
+  "name": "Christos: The Jesus Bible Experience",
+  "description": "A Christ-centered Bible application featuring AI counseling, specialized Advent journeys, and immersive Nativity experiences.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
