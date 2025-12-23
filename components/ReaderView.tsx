@@ -78,7 +78,7 @@ const ReaderView: React.FC<ReaderViewProps> = ({ bookmarks, onToggleBookmark, on
           <select 
             value={book} 
             onChange={(e) => { setBook(e.target.value); setChapter(1); }}
-            className="bg-slate-100 border-none rounded-lg px-3 py-1.5 font-bold text-slate-800 focus:ring-2 focus:ring-indigo-500/20"
+            className="bg-slate-100 border-none rounded-lg px-3 py-1.5 font-bold text-slate-800 focus:ring-2 focus:ring-red-500/20"
           >
             {BOOKS.map(b => <option key={b} value={b}>{b}</option>)}
           </select>
@@ -86,7 +86,7 @@ const ReaderView: React.FC<ReaderViewProps> = ({ bookmarks, onToggleBookmark, on
             type="number" 
             value={chapter}
             onChange={(e) => setChapter(parseInt(e.target.value) || 1)}
-            className="w-16 bg-slate-100 border-none rounded-lg px-3 py-1.5 font-bold text-slate-800 focus:ring-2 focus:ring-indigo-500/20"
+            className="w-16 bg-slate-100 border-none rounded-lg px-3 py-1.5 font-bold text-slate-800 focus:ring-2 focus:ring-red-500/20"
           />
         </div>
 
@@ -102,7 +102,7 @@ const ReaderView: React.FC<ReaderViewProps> = ({ bookmarks, onToggleBookmark, on
       <div className="flex-1 p-6 md:p-10 bg-white sm:rounded-t-2xl sm:mt-4 shadow-xl shadow-slate-200/50 overflow-y-auto min-h-screen">
         {loading ? (
           <div className="flex flex-col items-center justify-center h-64 space-y-4">
-            <Loader2 className="w-10 h-10 text-indigo-600 animate-spin" />
+            <Loader2 className="w-10 h-10 text-red-600 animate-spin" />
             <p className="text-slate-500 font-medium">Opening the Word...</p>
           </div>
         ) : data ? (
@@ -110,13 +110,13 @@ const ReaderView: React.FC<ReaderViewProps> = ({ bookmarks, onToggleBookmark, on
             <h1 className="text-4xl font-bold mb-10 text-slate-900 border-b pb-6 border-slate-50">{data.reference}</h1>
             <div className="space-y-6">
               {data.verses.map((v) => {
-                const ref = `${data.book_name} ${v.chapter}:${v.verse}`;
+                const ref = `${v.book_name} ${v.chapter}:${v.verse}`;
                 const isBookmarked = bookmarks.some(b => b.reference === ref);
                 
                 return (
                   <div key={v.verse} className="relative group verse-container transition-colors rounded-xl p-4 -mx-4 hover:bg-slate-50/80">
                     <p className="leading-[1.8] text-slate-800">
-                      <sup className="text-indigo-600 font-bold mr-2 text-[0.6em]">{v.verse}</sup>
+                      <sup className="text-red-600 font-bold mr-2 text-[0.6em]">{v.verse}</sup>
                       {v.text}
                     </p>
                     
@@ -124,7 +124,7 @@ const ReaderView: React.FC<ReaderViewProps> = ({ bookmarks, onToggleBookmark, on
                     <div className="mt-4 flex items-center space-x-4 opacity-0 group-hover:opacity-100 transition-opacity">
                       <button 
                         onClick={() => onToggleBookmark(ref, v.text)}
-                        className={`flex items-center text-xs font-bold ${isBookmarked ? 'text-indigo-600' : 'text-slate-400 hover:text-slate-600'}`}
+                        className={`flex items-center text-xs font-bold ${isBookmarked ? 'text-red-600' : 'text-slate-400 hover:text-slate-600'}`}
                       >
                         <Bookmark className={`w-3.5 h-3.5 mr-1 ${isBookmarked ? 'fill-current' : ''}`} />
                         Bookmark
@@ -142,7 +142,7 @@ const ReaderView: React.FC<ReaderViewProps> = ({ bookmarks, onToggleBookmark, on
                       </button>
                       <button 
                          onClick={() => onExplain(ref, v.text)}
-                        className="flex items-center text-xs font-bold text-indigo-600 hover:text-indigo-700"
+                        className="flex items-center text-xs font-bold text-red-600 hover:text-red-700"
                       >
                         <Sparkles className="w-3.5 h-3.5 mr-1" />
                         AI Explain
