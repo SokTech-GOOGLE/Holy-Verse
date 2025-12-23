@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   define: {
     // Ensure process.env is available in the browser for API_KEY access
-    'process.env': process.env
+    'process.env': (process as any).env
   },
   server: {
     host: true,

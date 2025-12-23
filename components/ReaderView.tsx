@@ -8,12 +8,11 @@ import {
   Share2, 
   Volume2, 
   Sparkles,
-  Loader2,
-  Copy
+  Loader2
 } from 'lucide-react';
 import { fetchChapter, BOOKS } from '../services/bibleService';
 import { speakVerse, decode, decodeAudioData } from '../services/geminiService';
-import { BibleChapter, Bookmark as BookmarkType } from '../types';
+import { BibleChapter, Bookmark as BookmarkType, BibleVerse } from '../types';
 
 interface ReaderViewProps {
   bookmarks: BookmarkType[];
@@ -109,8 +108,9 @@ const ReaderView: React.FC<ReaderViewProps> = ({ bookmarks, onToggleBookmark, on
           <div className="bible-font" style={{ fontSize: `${fontSize}px` }}>
             <h1 className="text-4xl font-bold mb-10 text-slate-900 border-b pb-6 border-slate-50">{data.reference}</h1>
             <div className="space-y-6">
-              {data.verses.map((v) => {
-                const ref = `${v.book_name} ${v.chapter}:${v.verse}`;
+              {data.verses.map((v: BibleVerse) => {
+                // Use the parent data.reference to build the verse reference to avoid property issues
+                const ref = `${data.reference}:${v.verse}`;
                 const isBookmarked = bookmarks.some(b => b.reference === ref);
                 
                 return (
